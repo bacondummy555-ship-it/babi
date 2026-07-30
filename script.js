@@ -180,3 +180,11 @@ function typeFinalMessage() {
     }
   }, 70);
 }
+
+finalButton.addEventListener("click", () => {
+  finalMessage.classList.add("show");
+  finalButton.style.display = "none";
+
+  typeFinalMessage();
+  createHeartRain(50);
+});
