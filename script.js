@@ -1,3 +1,7 @@
+// ===============================
+// ELEMENTS
+// ===============================
+
 const intro = document.getElementById("intro");
 const openButton = document.getElementById("openButton");
 
@@ -5,6 +9,7 @@ const music = document.getElementById("music");
 const musicButton = document.getElementById("musicButton");
 
 const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
 const modalText = document.getElementById("modalText");
 const closeModal = document.getElementById("closeModal");
 
@@ -13,11 +18,23 @@ const finalMessage = document.getElementById("finalMessage");
 
 let musicPlaying = false;
 
+// Make the background music softer.
+music.volume = 0.3;
+
+// Prevent scrolling while the introduction is open.
 document.body.classList.add("locked");
+
+
+// ===============================
+// OPEN THE WEBSITE
+// ===============================
 
 openButton.addEventListener("click", async () => {
   intro.classList.add("hidden");
   document.body.classList.remove("locked");
+
+  // Show the music button if it uses the hidden class.
+  musicButton.classList.remove("hidden");
 
   createFlowerRain(25);
 
@@ -26,11 +43,20 @@ openButton.addEventListener("click", async () => {
 
     musicPlaying = true;
     musicButton.textContent = "❚❚";
-  } catch {
+    musicButton.setAttribute("aria-label", "Pause background music");
+  } catch (error) {
+    console.log("Music could not start automatically:", error);
+
     musicPlaying = false;
     musicButton.textContent = "♫";
+    musicButton.setAttribute("aria-label", "Play background music");
   }
 });
+
+
+// ===============================
+// MUSIC BUTTON
+// ===============================
 
 musicButton.addEventListener("click", async () => {
   if (musicPlaying) {
@@ -38,21 +64,40 @@ musicButton.addEventListener("click", async () => {
 
     musicPlaying = false;
     musicButton.textContent = "♫";
+    musicButton.setAttribute("aria-label", "Play background music");
   } else {
     try {
       await music.play();
 
       musicPlaying = true;
       musicButton.textContent = "❚❚";
-    } catch {
-      alert("Add a song named song.mp3 inside the website folder.");
+      musicButton.setAttribute("aria-label", "Pause background music");
+    } catch (error) {
+      console.log("Music could not play:", error);
+
+      alert(
+        "The music could not play. Make sure palagi.mp3 is inside the same folder as index.html."
+      );
     }
   }
 });
 
+
+// ===============================
+// FLOWER MESSAGES
+// ===============================
+
 document.querySelectorAll(".flower").forEach((flower) => {
   flower.addEventListener("click", () => {
-    modalText.textContent = flower.dataset.message;
+    // Use the flower's title.
+    if (modalTitle) {
+      modalTitle.textContent =
+        flower.dataset.title || "A Flower for You";
+    }
+
+    // Use the flower's message.
+    modalText.textContent =
+      flower.dataset.message || "This flower is for you, Babi.";
 
     modal.classList.add("show");
 
@@ -60,21 +105,44 @@ document.querySelectorAll(".flower").forEach((flower) => {
   });
 });
 
+
+// ===============================
+// CLOSE FLOWER MESSAGE
+// ===============================
+
 closeModal.addEventListener("click", () => {
   modal.classList.remove("show");
 });
 
+// Close the modal when the dark background is clicked.
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.classList.remove("show");
   }
 });
 
+// Close the modal using the Escape key.
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    modal.classList.remove("show");
+  }
+});
+
+
+// ===============================
+// FLIPPING REASON CARDS
+// ===============================
+
 document.querySelectorAll(".card").forEach((card) => {
   card.addEventListener("click", () => {
     card.classList.toggle("flipped");
   });
 });
+
+
+// ===============================
+// FINAL SURPRISE
+// ===============================
 
 finalButton.addEventListener("click", () => {
   finalMessage.classList.add("show");
@@ -83,8 +151,13 @@ finalButton.addEventListener("click", () => {
   createHeartRain(50);
 });
 
+
+// ===============================
+// FLOWER RAIN
+// ===============================
+
 function createFlowerRain(amount) {
-  const flowers = ["🌸", "🌷", "🌹", "✨"];
+  const flowers = ["🌸", "🌷", "🌹", "🌺", "✨"];
 
   for (let i = 0; i < amount; i++) {
     const item = document.createElement("span");
@@ -98,6 +171,7 @@ function createFlowerRain(amount) {
     item.style.fontSize = 15 + Math.random() * 20 + "px";
     item.style.animationDuration = 5 + Math.random() * 5 + "s";
     item.style.animationDelay = Math.random() * 2 + "s";
+
     item.style.setProperty(
       "--drift",
       Math.random() * 200 - 100 + "px"
@@ -107,12 +181,17 @@ function createFlowerRain(amount) {
 
     setTimeout(() => {
       item.remove();
-    }, 11000);
+    }, 12000);
   }
 }
 
+
+// ===============================
+// HEART RAIN
+// ===============================
+
 function createHeartRain(amount) {
-  const hearts = ["💗", "💕", "💖", "🌸", "✨"];
+  const hearts = ["💗", "💕", "💖", "💞", "🌸", "✨"];
 
   for (let i = 0; i < amount; i++) {
     const item = document.createElement("span");
@@ -126,6 +205,7 @@ function createHeartRain(amount) {
     item.style.fontSize = 18 + Math.random() * 22 + "px";
     item.style.animationDuration = 4 + Math.random() * 5 + "s";
     item.style.animationDelay = Math.random() * 1.5 + "s";
+
     item.style.setProperty(
       "--drift",
       Math.random() * 250 - 125 + "px"
@@ -135,9 +215,14 @@ function createHeartRain(amount) {
 
     setTimeout(() => {
       item.remove();
-    }, 10000);
+    }, 11000);
   }
 }
+
+
+// ===============================
+// SCROLL REVEAL ANIMATION
+// ===============================
 
 const revealElements = document.querySelectorAll(".reveal");
 
@@ -150,7 +235,7 @@ const observer = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.15,
+    threshold: 0.15
   }
 );
 
@@ -158,33 +243,14 @@ revealElements.forEach((element) => {
   observer.observe(element);
 });
 
+
+// ===============================
+// OCCASIONAL FALLING FLOWERS
+// ===============================
+
 setInterval(() => {
-  createFlowerRain(3);
+  // Only create flowers after the introduction is closed.
+  if (intro.classList.contains("hidden")) {
+    createFlowerRain(3);
+  }
 }, 5000);
-
-const messageToType = "I love you, Rain. Always. 💗";
-const typingText = document.getElementById("typingText");
-
-function typeFinalMessage() {
-  let index = 0;
-
-  typingText.textContent = "";
-
-  const typingInterval = setInterval(() => {
-    typingText.textContent += messageToType[index];
-
-    index++;
-
-    if (index >= messageToType.length) {
-      clearInterval(typingInterval);
-    }
-  }, 70);
-}
-
-finalButton.addEventListener("click", () => {
-  finalMessage.classList.add("show");
-  finalButton.style.display = "none";
-
-  typeFinalMessage();
-  createHeartRain(50);
-});
