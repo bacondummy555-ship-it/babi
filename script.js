@@ -161,3 +161,22 @@ revealElements.forEach((element) => {
 setInterval(() => {
   createFlowerRain(3);
 }, 5000);
+
+const messageToType = "I love you, Rain. Always. 💗";
+const typingText = document.getElementById("typingText");
+
+function typeFinalMessage() {
+  let index = 0;
+
+  typingText.textContent = "";
+
+  const typingInterval = setInterval(() => {
+    typingText.textContent += messageToType[index];
+
+    index++;
+
+    if (index >= messageToType.length) {
+      clearInterval(typingInterval);
+    }
+  }, 70);
+}
