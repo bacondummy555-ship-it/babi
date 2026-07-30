@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>A Bouquet for You</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <audio id="music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <section class="intro" id="intro">
+    <div class="intro-card">
+      <p class="small-title">AUGUST 1 · NATIONAL GIRLFRIEND DAY</p>
+
+      <h1>I grew something<br>special for you</h1>
+
+      <p>
+        This bouquet will never fade because every flower carries
+        a reason why I love you.
+      </p>
+
+      <button id="openButton">Enter the Garden 🌸</button>
+    </div>
+  </section>
+
+  <button id="musicButton" class="music-button">♫</button>
+
+  <main id="mainContent">
+
+    <section class="hero">
+      <p class="small-title">FOR RAIN</p>
+
+      <h2>A Bouquet That<br>Never Fades</h2>
+
+      <p class="hero-text">
+        Tap every flower to reveal a message made especially for you.
+      </p>
+
+      <div class="garden">
+
+        <div class="glow"></div>
+
+        <div class="flower flower-one" data-message="You make my life more beautiful.">
+          <span>🌹</span>
+        </div>
+
+        <div class="flower flower-two" data-message="Your smile makes my hardest days easier.">
+          <span>🌷</span>
+        </div>
+
+        <div class="flower flower-three" data-message="You are my favorite person and my safe place.">
+          <span>🌸</span>
+        </div>
+
+        <div class="flower flower-four" data-message="I will always choose you.">
+          <span>🌺</span>
+        </div>
+
+        <div class="flower flower-five" data-message="My love for you keeps growing every day.">
+          <span>🌻</span>
+        </div>
+
+        <div class="bouquet-wrap">
+          <div class="ribbon">RAIN</div>
+        </div>
+
+      </div>
+
+      <p class="instruction">Tap each flower ✨</p>
+    </section>
+
+    <section class="letter-section reveal">
+
+      <p class="small-title">A LETTER FROM MY HEART</p>
+
+      <h2>To My Beautiful Girl</h2>
+
+      <div class="letter">
+        <p>My love,</p>
+
+        <p>
+          Happy National Girlfriend Day. I wanted to give you something
+          more meaningful than a simple message, so I made this little
+          world just for you.
+        </p>
+
+        <p>
+          Thank you for making my life brighter, for staying beside me,
+          and for making ordinary days feel special.
+        </p>
+
+        <p>
+          Just like these flowers, my love for you continues to grow.
+          No matter what season comes, I will always be grateful that
+          I have you.
+        </p>
+
+        <p class="signature">Always yours, JL ❤️</p>
+      </div>
+
+    </section>
+
+    <section class="memory-section reveal">
+
+      <p class="small-title">OUR FAVORITE MOMENTS</p>
+
+      <h2>Our Little Memories</h2>
+
+      <div class="photos">
+        <img src="photo1.jpg" alt="Memory one">
+        <img src="photo2.jpg" alt="Memory two">
+        <img src="photo3.jpg" alt="Memory three">
+      </div>
+
+    </section>
+
+    <section class="reasons-section reveal">
+
+      <p class="small-title">A FEW REASONS</p>
+
+      <h2>Why I Love You</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">🌷<br>Tap Me</div>
+            <div class="card-back">You always know how to make me smile.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">🌸<br>Tap Me</div>
+            <div class="card-back">You make me feel loved and understood.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">🌹<br>Tap Me</div>
+            <div class="card-back">You make every ordinary moment special.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="final-section reveal">
+
+      <p class="small-title">ONE LAST SURPRISE</p>
+
+      <h2>There Is One More Flower</h2>
+
+      <button id="finalButton">Open My Heart ❤️</button>
+
+      <div id="finalMessage" class="final-message">
+        <h3>Happy National Girlfriend Day!</h3>
+
+        <p>
+          This bouquet may only exist on a screen, but every flower,
+          every word, and every little detail was made with real love.
+        </p>
+
+        <strong>I love you, Rain. Always. 💗</strong>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <span class="modal-flower">🌸</span>
+
+      <h3>A Flower for You</h3>
+
+      <p id="modalText"></p>
+
+      <button id="closeModal">Keep This Flower</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
